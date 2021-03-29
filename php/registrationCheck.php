@@ -55,5 +55,11 @@ if (count($err) != 0) {
 }
 else {
     addUserToDB($_POST['userFirstName'], $_POST['userLastName'], $_POST['userFatherName'], $_POST['email'], password_hash($_POST['password'], PASSWORD_DEFAULT));
-    
+    unset($_SESSION['userFirstName']);
+    unset($_SESSION['userLastName']);
+    unset($_SESSION['userFatherName']);
+    unset($_SESSION['email']);
+    setcookie("authorized", 1, time()+3600, "/");
+    setcookie("userName", $_POST['userFirstName'], time()+3600, "/");
+    echo '<script>location.replace("../index.php");</script>';
 }
