@@ -50,7 +50,7 @@ $_SESSION['userFatherName'] = $_POST['userFatherName'];
 $_SESSION['email'] = $_POST['email'];
 if (count($err) != 0) {
     $_SESSION['registrationError'] = $err;
-    echo '<script>location.replace("../pages/registration.php");</script>';
+    header('Location: ../pages/registration.php');
     exit;
 }
 else {
@@ -61,5 +61,5 @@ else {
     unset($_SESSION['email']);
     setcookie("authorized", 1, time()+3600, "/");
     setcookie("userName", $_POST['userFirstName'], time()+3600, "/");
-    echo '<script>location.replace("../index.php");</script>';
+    header('Location: ../index.php');
 }

@@ -72,7 +72,7 @@
                                             } 
                                             else 
                                             {
-                                                echo 'placeholder="Фамилия"';
+                                                echo 'placeholder="Отчество"';
                                             } 
                                             ?>
                  aria-label="Last name" name="userFatherName">
