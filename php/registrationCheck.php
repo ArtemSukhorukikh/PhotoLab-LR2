@@ -42,7 +42,7 @@ if (!empty($_POST['password'])) {
     }
 }
 else {
-    $err['  '] = true;
+    $err['NO_PASSWORD'] = true;
 }
 $_SESSION['userFirstName'] = $_POST['userFirstName'];
 $_SESSION['userLastName'] = $_POST['userLastName'];
@@ -54,12 +54,19 @@ if (count($err) != 0) {
     exit;
 }
 else {
-    addUserToDB($_POST['userFirstName'], $_POST['userLastName'], $_POST['userFatherName'], $_POST['email'], password_hash($_POST['password'], PASSWORD_DEFAULT));
-    unset($_SESSION['userFirstName']);
-    unset($_SESSION['userLastName']);
-    unset($_SESSION['userFatherName']);
-    unset($_SESSION['email']);
-    setcookie("authorized", 1, time()+3600, "/");
-    setcookie("userName", $_POST['userFirstName'], time()+3600, "/");
-    header('Location: ../index.php');
+    if (addUserToDB($_POST['userFirstName'], $_POST['userLastName'], $_POST['userFatherName'], $_POST['email'], password_hash($_POST['password'], PASSWORD_DEFAULT))) {
+        unset($_SESSION['userFirstName']);
+        unset($_SESSION['userLastName']);
+        unset($_SESSION['userFatherName']);
+        unset($_SESSION['email']);
+        setcookie("authorized", 1, time()+3600, "/");
+        setcookie("userName", $_POST['email'], time()+3600, "/");
+        header('Location: ../pages/myPage.php');
+    }
+    else {
+        $_SESSION['registrationError']['INVALID_EMAIL'] = true;
+        header('Location: ../pages/registration.php');
+        exit;
+    }
+    
 }
