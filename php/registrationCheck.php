@@ -36,8 +36,13 @@ else {
     $err['NO_EMAIL'] = true;
 }
 
-if (!empty($_POST['password'])) {
-    if (!preg_match("/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/", $_POST['password'])) {
+if (!empty($_POST['password']) && !empty($_POST['password2'])) {
+    if ($_POST['password'] == $_POST['password2']) {
+        if (!preg_match("/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/", $_POST['password'])) {
+            $err['INVALID_PASSWORD'] = true;
+        }
+    }
+    else {
         $err['INVALID_PASSWORD'] = true;
     }
 }

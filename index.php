@@ -1,4 +1,9 @@
-<?php include_once('pages/header.php') ?>
+<?php
+    include_once('pages/header.php');
+    require_once ('php/operationsWithDB.php');
+    unset($_SESSION);
+    $photos = getLastPhotos();
+?>
     <div class="container-lg">
         <!-- Stack the columns on mobile by making one full-width and the other half-width -->
         <div class="row">
@@ -19,41 +24,19 @@
         </div>
         <!-- Columns are always 50% wide, on mobile and desktop -->
         <div class="row">
-        <div class="col-md"><h2 class="display-2">Последние фотографии на "PhotoLab"</h1></div>
+        <div class="col-md"><h1 class="display-2">Последние фотографии на "PhotoLab"</h1></div>
         </div>
-        <div class="row justify-content-between">
-                <div class="card" style="width: 18rem;">
-                    <img src="https://ykl-res.azureedge.net/fdfcb95c-9b10-4bc5-9b80-d7e26033ca69/dsc0017.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
+        <div class="row justify-content-center">
+            <?php foreach ($photos as $post) {?>
+                <div class="card m-5" style="width: 18rem;">
+                        <img src=<?=$post->urlPhoto?> class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <p class="card-text"><?=$post->description?></p>
+                            <p class="card-text"><?=$post->datePublication?></p>
+                            <a href="pages\myPage.php?id=<?=$post->authorId?>" class="btn btn-primary">Go somewhere</a>
+                        </div>
                 </div>
-                <div class="card" style="width: 18rem;">
-                    <img src="https://ykl-res.azureedge.net/fdfcb95c-9b10-4bc5-9b80-d7e26033ca69/dsc0017.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-                <div class="card" style="width: 18rem;">
-                    <img src="https://ykl-res.azureedge.net/fdfcb95c-9b10-4bc5-9b80-d7e26033ca69/dsc0017.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-                <div class="card" style="width: 18rem;">
-                    <img src="https://ykl-res.azureedge.net/fdfcb95c-9b10-4bc5-9b80-d7e26033ca69/dsc0017.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
+            <?}?>
         </div>
         <br>
     </div>

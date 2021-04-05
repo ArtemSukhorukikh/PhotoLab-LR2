@@ -5,3 +5,8 @@
 .card-img-top{
     margin-top: 5%;
 }
+
+.carousel-item{
+    width: 50%;
+    height: 50%;
+}
