@@ -114,28 +114,50 @@
             ?>
         </div>
         <div class="form-floating">
-            <input type="password" class=<?php echo '"form-control '; 
-                                            if (isset($_SESSION['registrationError']['INVALID_PASSWORD']) or isset($_SESSION['registrationError']['NO_PASSWORD']))
-                                            {
-                                                echo 'is-invalid"';
-                                            }
-                                            else
-                                            {
-                                                echo '"';
-                                            }?> 
-            id="exampleInputPassword1" placeholder="Password" name="password">
-            <label for="exampleInputPassword1">Пароль </label>
-            <?php
-                if (isset($_SESSION['registrationError']['INVALID_PASSWORD']) or isset($_SESSION['registrationError']['NO_PASSWORD'])) 
+            <div>
+                <input type="password" class=<?php echo '"form-control ';
+                if (isset($_SESSION['registrationError']['INVALID_PASSWORD']) or isset($_SESSION['registrationError']['NO_PASSWORD']))
                 {
-                    echo '<div id="validationServerUsernameFeedback" class="invalid-feedback">Использован недопустимый пароль</div>';
+                    echo 'is-invalid"';
                 }
-            ?>
+                else
+                {
+                    echo '"';
+                }?>
+                id="exampleInputPassword1" placeholder="Введите пароль" name="password">
+            </div>
+            <br>
+            <div>
+                <input type="password" class=<?php echo '"form-control ';
+                if (isset($_SESSION['registrationError']['INVALID_PASSWORD']) or isset($_SESSION['registrationError']['NO_PASSWORD']))
+                {
+                    echo 'is-invalid"';
+                }
+                else
+                {
+                    echo '"';
+                }?>
+                id="exampleInputPassword2" placeholder="Повторите пароль" name="password2">
+                <?php
+                if (isset($_SESSION['registrationError']['INVALID_PASSWORD']) or isset($_SESSION['registrationError']['NO_PASSWORD']))
+                {
+                    echo '<div id="validationServerUsernameFeedback" class="invalid-feedback">Использован недопустимый пароль или пароли не совпадают</div>';
+                }
+                ?>
+            </div>
             <div id="passwordHelpBlock" class="form-text">
                 Пароль должен содержать минимум 8 , состоять из символов верхнего регистра, а также цифры.
             </div>
         </div>
-        <br/>   
+        <div class="form-check">
+            <input class="form-check-input " type="checkbox" value="1" id="invalidCheck" name="flag" required>
+            <label class="form-check-label" for="invalidCheck">
+                Согласие на обработку персональных данный
+            </label>
+            <div id="invalidCheck" class="invalid-feedback">
+                Отсутствие согласия на обработку персональных данный
+            </div
+        </div>
         <div class="d-grid gap-2 col-6 mx-auto">
             <button class="btn btn-primary" type="submit" name="submit">Зарегистрироваться</button>
         </div>

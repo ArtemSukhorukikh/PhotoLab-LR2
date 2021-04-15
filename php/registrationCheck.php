@@ -36,14 +36,21 @@ else {
     $err['NO_EMAIL'] = true;
 }
 
-if (!empty($_POST['password'])) {
-    if (!preg_match("/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/", $_POST['password'])) {
+if (!empty($_POST['password']) && !empty($_POST['password2'])) {
+    if ($_POST['password'] == $_POST['password2']) {
+        if (!preg_match("/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/", $_POST['password'])) {
+            $err['INVALID_PASSWORD'] = true;
+        }
+    }
+    else {
         $err['INVALID_PASSWORD'] = true;
     }
 }
 else {
     $err['NO_PASSWORD'] = true;
 }
+
+
 $_SESSION['userFirstName'] = $_POST['userFirstName'];
 $_SESSION['userLastName'] = $_POST['userLastName'];
 $_SESSION['userFatherName'] = $_POST['userFatherName'];
@@ -58,9 +65,7 @@ else {
         unset($_SESSION['userFirstName']);
         unset($_SESSION['userLastName']);
         unset($_SESSION['userFatherName']);
-        unset($_SESSION['email']);
-        setcookie("authorized", 1, time()+3600, "/");
-        setcookie("userName", $_POST['email'], time()+3600, "/");
+        $_SESSION['authorized'] = 1;
         header('Location: ../pages/myPage.php');
     }
     else {

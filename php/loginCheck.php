@@ -24,21 +24,16 @@ if (count($err) != 0) {
 }
 else {
   
-    if (findUserInDB($_POST['inputEmail'], $_POST['inputPassword']) == 'NO_USER_WITH_THAT_EMAIL' or findUserInDB($_POST['inputEmail'], $_POST['inputPassword']) == 'WRONG_PASSWORD') {
-        $_SESSION['loginError'] = $err;
+    if (!findUserInDB($_POST['inputEmail'], $_POST['inputPassword'])) {
+        $_SESSION['loginError']['INVALID_EMAIL'] = true;
         $_SESSION['email'] = $_POST['inputEmail'];
         header('Location: ../pages/login.php');
         exit;
     }
     else {
-        if ($_POST['stayInSystem'] == 'on') {
-            setcookie("authorized", "/");
-            setcookie("userEmail", $_POST['email'], "/");
-        }
-        else {
-            setcookie("authorized", 1, time()+3600, "/");
-            setcookie("userName", $_POST['email'], time()+3600, "/");
-        }
+        unset($_SESSION['loginError']);
+        $_SESSION['authorized'] = 1;
+        $_SESSION['email'] = $_POST['inputEmail'];
         header('Location: ../pages/myPage.php');
     }
 }

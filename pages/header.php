@@ -25,14 +25,14 @@
                         <a class="nav-link active" aria-current="page" href="../index.php">Главная страница</a>
                     </li>
                 </ul>
-                <form class="d-flex">
+                <!--<form class="d-flex" action="myPage.php">
                     <input class="form-control me-1" type="search" placeholder="Поиск фотогаллереи" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Поиск</button>
-                </form>
+                </form>-->
                 <?php
-                    if (isset($_COOKIE['authorized'])) {
-                        echo "<a class=\"nav-link active\" aria-current=\"page\" href=\"../pages/login.php\">
-                                {$_COOKIE['userName']}
+                    if (isset($_SESSION['authorized'])) {
+                        echo "<a class=\"nav-link active\" aria-current=\"page\" href=\"../pages/myPage.php\">
+                                {$_SESSION['email']}
                                 </a>
                                 <a class=\"nav-link\" aria-current=\"page\" href=\"../php/logout.php\">
                                     Выход

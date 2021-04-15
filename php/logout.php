@@ -1,6 +1,6 @@
 <?php
-if (isset($_COOKIE['authorized'])) {
-    setcookie("authorized", 1, time()-3600, "/");
-    setcookie("userName", $_COOKIE['userName'], time()-3600, "/");
+if (isset($_SESSION['authorized'])) {
+    unset($_SESSION['authorized']);
+    unset($_SESSION['email']);
     echo '<script>location.replace("../index.php");</script>';
 }
