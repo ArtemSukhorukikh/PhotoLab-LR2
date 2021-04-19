@@ -1,13 +1,11 @@
-<?php
-
-
+<?php // Загрузка изображения
 require 'operationsWithDB.php';
 
-$err = [];
-if (empty($_POST['description'])){
+$err = []; // Массив ошибок
+if (empty($_POST['description'])){ // Проверка наличия описания
     $err['NO_DESCRIPTION'] = true;
 }
-if (!$_FILES['userFile']['type'] == 'image/jpeg') {
+if (!$_FILES['userFile']['type'] == 'image/jpeg') { // Проверка типа файла
     $err['NO_JPEG_TYPE'] = true;
 }
 if (count($err) == 0){

@@ -1,9 +1,9 @@
-<?php
+<?php //Персональная таблица пользователя
     require 'header.php';
     require_once '../php/user.php';
     $userPage = new user();
-    $userPage->getData((isset($_GET["email"]) ? $_GET["email"] : $_SESSION['email']),'email');
-    $userPage->getUsersPostsData($userPage->email);
+    $userPage->getData((isset($_GET["email"]) ? $_GET["email"] : $_SESSION['email']),'email'); // Получение основной информации о пользователе
+    $userPage->getUsersPostsData($userPage->email); // Получение постов пользователя
     $flagMyPage = isset($_SESSION['email']) ? $userPage->email == $_SESSION['email'] : false;
 ;?>
     <div class="container-xxl">
@@ -109,7 +109,7 @@
                 <div class="carousel-item">
                     <img src=<?=$userPage->userPosts[$i]->urlPhoto?> class="d-block w-100" alt="...">
                 </div>
-                <?}?>
+                <?php }?>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -119,7 +119,7 @@
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
-            <?}?>
+            <?php }?>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>

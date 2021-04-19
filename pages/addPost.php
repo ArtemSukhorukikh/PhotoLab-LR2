@@ -1,4 +1,4 @@
-<?php
+<?php // Страница добавления нового поста
 include_once('../pages/header.php');
 ?>
 <div class="container-sm" >

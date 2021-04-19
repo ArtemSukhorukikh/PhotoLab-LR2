@@ -1,4 +1,4 @@
-<?php
+<?php // Выход из уч. записи
 if (isset($_SESSION['authorized'])) {
     unset($_SESSION['authorized']);
     unset($_SESSION['email']);

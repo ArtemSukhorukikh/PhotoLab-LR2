@@ -1,9 +1,9 @@
 <?php
-
 require 'operationsWithDB.php';
 
-$err = [];
-if (!empty($_POST['userFirstName'])) {
+$err = []; // Массив ошибок
+//Валидация данных
+if (!empty($_POST['userFirstName'])) { // Проверка имени
     if (!preg_match('/^[a-zA-Zа-яёА-ЯЁ]+$/u', $_POST['userFirstName']) == 1) {
         $err['INVALID_USER_FIRTS_NAME'] = true;
     }
@@ -12,7 +12,7 @@ else {
     $err['NO_USERFIRST_NAME'] = true;
 }
 
-if (!empty($_POST['userLastName'])) {
+if (!empty($_POST['userLastName'])) { // Проверка фамилии
     if (!preg_match('/^[a-zA-Zа-яёА-ЯЁ]+$/u', $_POST['userLastName']) == 1) {
         $err['INVALID_USER_LASTNAME'] = true;
     }
@@ -21,13 +21,13 @@ else {
     $err['NO_USER_LAST_NAME'] = true;
 }
 
-if (!empty($_POST['userFatherName']) && !empty($_POST['userFatherName'])) {
+if (!empty($_POST['userFatherName'])) { // Проверка отчества
     if (!preg_match('/^[a-zA-Zа-яёА-ЯЁ]+$/u', $_POST['userFatherName']) == 1) {
         $err['INVALID_USER_FATHERNAME'] = true;
     }
 }
 
-if (!empty($_POST['email'])) {
+if (!empty($_POST['email'])) { // Проверка эл. почты
     if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
         $err['INVALID_EMAIL'] = true;
     }
@@ -36,7 +36,7 @@ else {
     $err['NO_EMAIL'] = true;
 }
 
-if (!empty($_POST['password']) && !empty($_POST['password2'])) {
+if (!empty($_POST['password']) && !empty($_POST['password2'])) { // Проверка пароля
     if ($_POST['password'] == $_POST['password2']) {
         if (!preg_match("/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/", $_POST['password'])) {
             $err['INVALID_PASSWORD'] = true;

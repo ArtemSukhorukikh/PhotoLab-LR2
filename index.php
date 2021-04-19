@@ -1,5 +1,5 @@
-<?php
-    include_once('pages/header.php');
+<?php // Главная страница
+    include_once('pages/header.php'); // Шапка сайта
     require_once ('php/operationsWithDB.php');
     unset($_SESSION);
     $photos = getLastPhotos();

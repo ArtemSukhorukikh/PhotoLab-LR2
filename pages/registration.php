@@ -1,4 +1,5 @@
-<?php include_once('header.php')?>
+<?php include_once('header.php') // Страница регистрации пользователя
+?>
 <div class="container-xxl">
     <form class="form-m" method="POST" action="../php/registrationCheck.php">
         <br/>

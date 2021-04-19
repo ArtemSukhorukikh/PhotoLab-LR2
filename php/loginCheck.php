@@ -1,10 +1,10 @@
-<?php
-
+<?php //Авторизация(вход)
 require 'operationsWithDB.php';
-//var_dump($_POST);
+
 unset($_SESSION['loginError']);
-$err = [];
-if (!empty($_POST['inputEmail'])) {
+$err = []; // Массив ошибок
+
+if (!empty($_POST['inputEmail'])) { //Проверка эл.почты
     if (!filter_var($_POST['inputEmail'], FILTER_VALIDATE_EMAIL)) {
         $err['INVALID_EMAIL'] = true;
     }
@@ -12,7 +12,8 @@ if (!empty($_POST['inputEmail'])) {
 else {
     $err['NO_EMAIL'] = true;
 }
-if (empty($_POST['inputPassword'])) {
+
+if (empty($_POST['inputPassword'])) { // Проверка пароля
     $err['NO_PASSWORD'] = true;
 }
 
@@ -24,7 +25,7 @@ if (count($err) != 0) {
 }
 else {
   
-    if (!findUserInDB($_POST['inputEmail'], $_POST['inputPassword'])) {
+    if (!findUserInDB($_POST['inputEmail'], $_POST['inputPassword'])) { // Поиск пользователя в БД
         $_SESSION['loginError']['INVALID_EMAIL'] = true;
         $_SESSION['email'] = $_POST['inputEmail'];
         header('Location: ../pages/login.php');

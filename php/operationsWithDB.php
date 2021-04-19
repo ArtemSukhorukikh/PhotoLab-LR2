@@ -1,8 +1,7 @@
-<?php
+<?php // Работа с БД
 require_once 'user.php';
 
-
-function checkRating($idPost, $userEmail) {
+function checkRating($idPost, $userEmail) { // Проверка поставил ли пользователь оценку на данный пост
     try {
         $db = new PDO('pgsql:host=127.0.0.1;dbname=photoLabDB', 'user', '123qwe');
         $query = 'SELECT "idRating" FROM public."postsRatings" WHERE ("idPost" = :idPost AND "userEmail" = :userEmail);';
@@ -22,7 +21,7 @@ function checkRating($idPost, $userEmail) {
 }
 
 
-function addRating($userEmail, $idPost, $value) {
+function addRating($userEmail, $idPost, $value) { // Оценка поста пользователем
     try {
         $db = new PDO('pgsql:host=127.0.0.1;dbname=photoLabDB', 'user', '123qwe');
         $db->beginTransaction();
@@ -58,7 +57,7 @@ function addRating($userEmail, $idPost, $value) {
 }
 
 
-function addPost($userEmail, $url, $description) {
+function addPost($userEmail, $url, $description) { // Добаление нового поста
     try {
         $db = new PDO('pgsql:host=127.0.0.1;dbname=photoLabDB', 'user', '123qwe');
         $query = 'INSERT INTO "photoLabPosts" ("description", "datePublication", "urlPhoto", "userEmail") VALUES(:description, :datePublication, :urlPhoto, :userEmail)';
@@ -78,7 +77,7 @@ function addPost($userEmail, $url, $description) {
 }
 
 
-function getLastPhotos(){
+function getLastPhotos(){ // Получение последник 20 публикаций
     try {
         $db = new PDO('pgsql:host=127.0.0.1;dbname=photoLabDB', 'user', '123qwe');
         $query = 'SELECT "idPost", description, "datePublication", "middleRating", ratings, "urlPhoto", "userEmail" FROM public."photoLabPosts" ORDER BY "datePublication" DESC LIMIT 20;';
@@ -106,7 +105,7 @@ function getLastPhotos(){
 }
 
 
-function getUserPhotos($userEmail)
+function getUserPhotos($userEmail) // Получение постов пользователя
 {
     try {
         $db = new PDO('pgsql:host=127.0.0.1;dbname=photoLabDB', 'user', '123qwe');
@@ -134,7 +133,7 @@ function getUserPhotos($userEmail)
 }
 
 
-function getUser($userValue, $type = 'email')
+function getUser($userValue, $type = 'email') // Получение данных о пользователе
 {
     try {
         $db = new PDO('pgsql:host=127.0.0.1;dbname=photoLabDB', 'user', '123qwe');
@@ -167,7 +166,7 @@ function getUser($userValue, $type = 'email')
     return 'ERROR';
 }
 
-function addUserToDB($userFirstName, $userSecondName, $userFatherName, $userEmail, $userHashPassword)
+function addUserToDB($userFirstName, $userSecondName, $userFatherName, $userEmail, $userHashPassword) // Добавление нового пользователя в БД
 {
     try {
         $db = new PDO('pgsql:host=127.0.0.1;dbname=photoLabDB', 'user', '123qwe');
@@ -194,7 +193,7 @@ function addUserToDB($userFirstName, $userSecondName, $userFatherName, $userEmai
     
 }
 
-function checkUserInDB($userEmail)
+function checkUserInDB($userEmail) // Проверка существует ли пользователь с такой элю почтой
 {
     try {
         $db = new PDO('pgsql:host=127.0.0.1;dbname=photoLabDB', 'user', '123qwe');
@@ -210,7 +209,7 @@ function checkUserInDB($userEmail)
     }
 }
 
-function findUserInDB($userEmail, $userPassword)
+function findUserInDB($userEmail, $userPassword) // Проверка эл почты и пароля при входе
 {
     try {
         $db = new PDO('pgsql:host=127.0.0.1;dbname=photoLabDB', 'user', '123qwe');

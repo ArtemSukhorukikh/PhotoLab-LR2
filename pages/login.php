@@ -1,4 +1,5 @@
-<?php include_once('header.php');?>
+<?php include_once('header.php'); // Страница авторизации
+?>
     <div class="container-sm" style="margin-top: 45px;">
         <form method="POST" action="../php/loginCheck.php">
             <div class="row mb-3">

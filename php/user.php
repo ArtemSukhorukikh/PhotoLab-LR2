@@ -1,8 +1,7 @@
 <?php
 require_once 'operationsWithDB.php';
 
-
-class user
+class user //Класс описывающий основные информационные поля пользователя
 {
     public $id;
     public $name;
@@ -11,7 +10,7 @@ class user
     public $email;
     public $userPosts;
 
-    public function getData($userEmail, $type)
+    public function getData($userEmail, $type) // Заполенение данных о пользователе
     {
         $tmpUser = getUser($userEmail, $type);
         $this->id = $tmpUser->id;
@@ -22,14 +21,14 @@ class user
     }
 
 
-    public function getUsersPostsData($userEmail)
+    public function getUsersPostsData($userEmail) // Получение публикаций пользователя
     {
         $this->userPosts = getUserPhotos($userEmail);
     }
 }
 
 
-class photoPost
+class photoPost // Класс описывающий пост пользователя
 {
     public $postId;
     public $authorEmail;
